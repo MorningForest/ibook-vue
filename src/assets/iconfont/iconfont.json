@@ -1,0 +1,79 @@
+{
+  "id": "3347834",
+  "name": "座位预定xi't",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1046065",
+      "name": "单列列表",
+      "font_class": "danlieliebiao",
+      "unicode": "e6e4",
+      "unicode_decimal": 59108
+    },
+    {
+      "icon_id": "666885",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "17842870",
+      "name": "自习室",
+      "font_class": "zixishi",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "2076418",
+      "name": "修改",
+      "font_class": "xiugai",
+      "unicode": "e8cf",
+      "unicode_decimal": 59599
+    },
+    {
+      "icon_id": "3538379",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e718",
+      "unicode_decimal": 59160
+    },
+    {
+      "icon_id": "68264",
+      "name": "搜索，猫客",
+      "font_class": "sousuo",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "4553833",
+      "name": "会员注册登录管理",
+      "font_class": "huiyuanzhucedengluguanli",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "10593803",
+      "name": "下一步,登录_jurassic",
+      "font_class": "jurassic_next",
+      "unicode": "e69e",
+      "unicode_decimal": 59038
+    },
+    {
+      "icon_id": "826097",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "5387769",
+      "name": "锁定_o",
+      "font_class": "suoding",
+      "unicode": "eb50",
+      "unicode_decimal": 60240
+    }
+  ]
+}

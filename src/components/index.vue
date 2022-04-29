@@ -1,15 +1,14 @@
 <template>
   <el-container>
-    <el-main>
-      <el-row>
-          <el-col :span="4" style="height: 600px">
+    <el-main style="background-color: #f5f9fc !important;">
+      <el-row style="height: 100vh!important;">
+          <el-col :span="4" style="height: 100%">
               <div class="aside-bar-logo">
                 <i class="iconfont icon-zixishi"> Ibooking</i>
               </div>
                  <el-menu
                   default-active="2"
-                  class="el-menu-vertical-demo"
-                  style="background-color:gray!important; height: 90%; font-weight: 700"
+                  style="height: 90%; font-weight: 700"
                   >
                   <el-menu-item index="2">
                     <i class="el-icon-location"></i>
@@ -36,40 +35,60 @@
                  </div>
               </div> -->
           </el-col>
-          <el-col :span="20" style="background-color: blue;height: 600px">
+          <el-col :span="20" style="background-color: #fff;">
               <el-menu
-                :default-active="activeIndex2"
                 class="el-menu-demo"
                 mode="horizontal"
-                @select="handleSelect"
-                background-color="#545c64"
-                text-color="#fff"
                 style="display: flex; justify-content: flex-end; height: 40px;"
                 active-text-color="#ffd04b">
                 <el-menu-item index="1" style="height: 40px; line-height: 40px">
                   <i class="iconfont icon-sousuo"></i>
                 </el-menu-item>
-                <el-menu-item index="2" style="height: 40px; line-height: 40px;">
+                <el-menu-item index="2" style="height: 40px; line-height: 40px; margin-right:10px">
                   <div class="display: flex">
-                    <el-avatar shape="square" :size="30" :fit="fill" :src="src"></el-avatar>
-                      <span style="margin-left: 5px;">Talyer</span>
-                       <i class="el-icon-arrow-down"></i>
-                       <i class="el-icon-arrow-up" v-show="false"></i>
+                    <el-avatar shape="square" :size="30" fit="fit" :src="src"></el-avatar>
+                      <span style="margin-left: 5px;">administrator</span>
                   </div>
                 </el-menu-item>
-                <!-- <el-menu-item index="3" style="height: 40px; line-height: 40px; margin-right:10px">
-                    <i class="el-icon-arrow-down"></i>
-                  </el-menu-item> -->
               </el-menu>
-              <el-row :gutter="24" style="padding-left: 10px">
-                <el-col v-for="o in 6" :key="o" :xs="8" :sm="6" :md="5" :lg="5" style="margin-top:10px">
+              
+              <div class="nav-bottom">
+                  <el-row type="flex" >
+                    <el-col :span="12" style="display: flex; justify-content: flex-start">
+                      <i class="iconfont icon-zhaoshou_swing" style="line-height: 20px;font-size: 25px; color: yellow;"></i>
+                      <strong>Hi, Administrator!</strong>
+                    </el-col>
+                    <el-col :span="12" style="display: flex; justify-content: flex-end">
+                      <el-button type="primary" size="small">
+                        create</el-button>
+                      <el-button type="danger" icon="el-icon-delete" size="small">
+                        delete</el-button>
+                      <el-button type="info" icon="el-icon-edit" size="small">
+                        edit</el-button>  
+                    </el-col>
+                  </el-row>
+                  <el-row>
+                    <el-menu default-active="1" background-color="#f5f9fc" mode="horizontal"
+                    active-text-color="blue"
+                    style="height: 30px; line-height: 30px;border-bottom-width: 1px !important;">
+                      <el-menu-item index="1">view all</el-menu-item>
+                      <el-menu-item index="2">students</el-menu-item>
+                      <el-menu-item index="3">sort</el-menu-item>
+                    </el-menu>
+                  </el-row>
+              </div>
+              
+
+              <el-row :gutter="24" style="padding-left: 10px" v-for="i in 2" :key="i">
+                <el-col v-for="o in 4" :key="o" :span="6" style="margin-top:10px">
                   <el-card class="box-card" :body-style="{ padding: '0px' }">
                     <div slot="header" class="clearfix card-header">
                     <!-- <span>卡片名称</span> -->
-                      <span style="font-size: 15px; font-weight: 600; line-height: 20px">自习室{{o}}</span>
+                      <span style="font-size: 15px; font-weight: 600; line-height: 15px">自习室{{o}}</span>
                     </div>
                     <el-image
                       :src="src"
+                      style="height: 80px; width: 100%"
                       fit="fill"></el-image>
                    <div style="padding: 0px; margin-top: 10px;">
                       <!-- <span style="font-size: 15px; font-weight: 500; line-height: 20px">自习室{{o}}</span> -->
@@ -94,6 +113,17 @@
                    </div>
                   </el-card>
                 </el-col>
+              
+              
+              
+              </el-row>
+
+              <el-row>
+                <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :total="1000">
+                  </el-pagination>
               </el-row>
           </el-col>
       </el-row>
@@ -106,7 +136,8 @@ export default {
   name: 'index',
   data () {
     return {
-      src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
+      src: require('../assets/bbb.jpg')
+      // src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
     }
   },
   methods: {
@@ -181,5 +212,14 @@ export default {
   padding: 5px;
   font-size: 16px;
 
+}
+.nav-bottom {
+  padding-top: 1.5rem;
+  padding-left: 10px;
+  padding-right: 0.5rem;
+  background-color: #f5f9fc;
+}
+.nav-bottom .el-menu-item {
+  height: 30px; line-height: 30px;
 }
 </style>

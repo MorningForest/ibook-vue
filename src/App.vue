@@ -18,6 +18,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   /* min-height: 500px; */
+  height: 100%;
 }
 html, body {
   height: 100%;

@@ -26,7 +26,8 @@
 	  <el-row :gutter="24" type="flex" class="password">
 			<el-col :span="8" :offset="8">	  
 			<div>
-				<el-input v-model="password" placeholder="Password"
+				<el-input v-model="password" placeholder="Password" 
+				@keyup.enter.native="checkLogin"
 				size="medium" prefix-icon="iconfont icon-suoding" show-password>
 				</el-input>
 			</div> 
@@ -84,9 +85,11 @@ export default {
   },
   mounted(){
     this.getHeight();
+	this.loadLoginInfoBySession();
   },
   updated(){
     this.getHeight();
+	this.loadLoginInfoBySession();
   },
   methods:{
 	getHeight(){
@@ -94,14 +97,45 @@ export default {
 		  	this.defaultheight.height = window.innerHeight+ "px";
 		 	this.defaultwidth.width = parseInt(window.innerWidth * 1/3 -35) + 'px';
   		},
+	loadLoginInfoBySession(){
+		let userinfo = JSON.parse(sessionStorage.getItem("userInfo"));
+		this.account = userinfo.username;
+		this.password = userinfo.password;
+	},
 	checkLogin(){
 		// 检测登录账号密码
-		console.log("admin")
-		console.log(this.account)
 		if(this.account == 'admin' && this.password =='admin'){
 			sessionStorage.setItem('token', 12345)
 			this.$router.push({
 				path: '/'
+			})
+		}else {
+			this.$axios.post("/apis/login?"+
+							"username=" + this.account +
+							"&password=" + this.password
+			).then(res=>{
+				let data = res.data.should_login;
+				if(res){
+					// 登录成功
+					sessionStorage.setItem('token', 12345)
+					this.$message({
+						message: '登录成功！3s后前往主页面',
+						type: 'success',
+						duration: 3000,
+						showClose: true,
+						center: true,
+               		 });
+					setTimeout(() => {
+							this.$router.push({
+									path: '/'
+							})
+					}, 3000);			
+				}else {
+					this.$message({
+						message: '登录失败！3s后前往主页面',
+						type: 'success'
+               		 });
+				}
 			})
 		}
 	},

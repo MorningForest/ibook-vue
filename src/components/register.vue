@@ -20,6 +20,11 @@
                                     size="medium" prefix-icon="iconfont icon-denglu" clearable>
                                 </el-input>
                             </el-form-item>
+                            <el-form-item prop="schoolid" class="register-input">
+                                <el-input v-model="ruleForm.schoolid" placeholder="Student number"
+                                    size="medium" prefix-icon="iconfont icon-denglu" clearable>
+                                </el-input>
+                            </el-form-item> 
                             <el-form-item prop="pass" class="register-input">
                                 <el-input v-model="ruleForm.pass" placeholder="Password"
                                     size="medium" prefix-icon="iconfont icon-suoding" show-password>
@@ -34,7 +39,7 @@
                         </el-form>
                         
                         <el-row>
-                            <el-button round size="small" style="color: #004643; font-weight:600;">
+                            <el-button round size="small" style="color: #004643; font-weight:600;" @click="register">
                                 Sign up
                             </el-button>
                         </el-row>
@@ -82,14 +87,27 @@ export default ({
           return callback(new Error('不能为空'));
         }
         setTimeout(() => {
-          if (!Number.isInteger(value) || (value.length > 11 || value.length < 11)) {
-            callback(new Error('学号必须为11位数字'));
+          if (value.length < 4 || value.length > 10) {
+            callback(new Error('用户名长度必须大于3小于11'));
           } 
-            else {
+        else {
               callback();
             }
         }, 1000);
          };
+        var checkSchoolid = (rule, value, callback) => {
+            if (!value) {
+                return callback(new Error('不能为空'));
+            }
+            setTimeout(() => {
+            if (isNaN(value) || value.length != 11) {
+                callback(new Error('学号必须为11位数字'));
+            } 
+            else {
+                callback();
+                }
+            }, 1000);
+        };
         var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
@@ -116,7 +134,8 @@ export default ({
             ruleForm: {
                 pass: '',
                 checkPass: '',
-                userName: ''
+                userName: '',
+                schoolid: '',
             },
             rules: {
             pass: [
@@ -127,6 +146,9 @@ export default ({
             ],
             userName: [
                 { validator: checkuserName, trigger: 'blur' }
+            ],
+            schoolid : [
+                {validator: checkSchoolid, trigger: 'blur'}
             ]
             }
             }
@@ -142,6 +164,47 @@ export default ({
 		  	// 计算获取得屏幕得长度和宽度
 		  	this.defaultheight.height = window.innerHeight+ "px";
   		},
+    sleep(ms) {
+        return new Promise(resolve=>setTimeout(resolve, ms))
+        },
+    
+    register() {
+        // 注册
+        this.$axios.post("/apis/register?"+
+            'username='+ this.ruleForm.userName+
+            '&password='+ this.ruleForm.pass+
+            '&schoolid='+ this.ruleForm.schoolid
+        ).then(res=>{
+            if (res.data.register_success){
+                // 登录成功
+                console.log('success')
+                // 本地存储
+                let userObject = {
+                    username: this.ruleForm.userName,
+                    password: this.ruleForm.pass,
+                    schoolid: this.ruleForm.schoolid 
+                }
+                sessionStorage.setItem("userInfo", JSON.stringify(userObject))
+                this.$message({
+                    message: '注册成功！3s后前往登录页面',
+                    type: 'success',
+                    duration: 3000,
+                    showClose: true,
+                    center: true,
+                });
+                // 路由跳转
+                setTimeout(() => {
+                    this.$router.push({'path': '/login'})
+                }, 3000);
+                
+            }else{
+                 this.$message({
+                    message: '注册失败！',
+                    type: 'warning'
+                 });
+            }
+        })
+    }
   }
 })
 </script>

@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3347834 */
-  src: url('iconfont.woff2?t=1650782605687') format('woff2'),
-       url('iconfont.woff?t=1650782605687') format('woff'),
-       url('iconfont.ttf?t=1650782605687') format('truetype');
+  src: url('iconfont.woff2?t=1650956518786') format('woff2'),
+       url('iconfont.woff?t=1650956518786') format('woff'),
+       url('iconfont.ttf?t=1650956518786') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zhaoshou_swing:before {
+  content: "\e81d";
+}
+
+.icon-xiugai1:before {
+  content: "\e6b8";
+}
+
+.icon-delete:before {
+  content: "\e61a";
+}
+
+.icon-zengjia:before {
+  content: "\e69c";
 }
 
 .icon-danlieliebiao:before {

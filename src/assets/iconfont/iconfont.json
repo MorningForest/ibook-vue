@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "25689886",
+      "name": "招手_swing",
+      "font_class": "zhaoshou_swing",
+      "unicode": "e81d",
+      "unicode_decimal": 59421
+    },
+    {
+      "icon_id": "1684803",
+      "name": "修改",
+      "font_class": "xiugai1",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "438062",
+      "name": "delete",
+      "font_class": "delete",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "2803710",
+      "name": "增加",
+      "font_class": "zengjia",
+      "unicode": "e69c",
+      "unicode_decimal": 59036
+    },
+    {
       "icon_id": "1046065",
       "name": "单列列表",
       "font_class": "danlieliebiao",

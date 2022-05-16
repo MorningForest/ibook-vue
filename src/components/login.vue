@@ -34,13 +34,8 @@
 			</el-col> 
 
 		</el-row>
-		<el-row class="info">
-		  <el-col :span="4" :offset="12">
-			  <el-link type="success">Forget Password ....?</el-link>
-		  </el-col>
-		</el-row>
 
-		<el-row :gutter="24" type="flex" style="font-size: 15px;">
+		<el-row :gutter="24" type="flex" style="font-size: 15px;margin-top: 1em">
 		  <el-col :span="8" :offset="8">
 				  <el-button type="primary" size="small" 
 				  class="login-bn" @click="checkLogin"
@@ -99,13 +94,18 @@ export default {
   		},
 	loadLoginInfoBySession(){
 		let userinfo = JSON.parse(sessionStorage.getItem("userInfo"));
-		this.account = userinfo.username;
-		this.password = userinfo.password;
+		// this.account = userinfo.username;
+		// this.password = userinfo.password;
 	},
 	checkLogin(){
 		// 检测登录账号密码
-		if(this.account == 'admin' && this.password =='admin'){
+		let userObject = {
+						username: this.account,
+					}
+		if(this.account == 'admin' && this.password =='admin'){		
+			userObject.username = 'Administrator'
 			sessionStorage.setItem('token', 12345)
+			sessionStorage.setItem('userInfo', JSON.stringify(userObject));
 			this.$router.push({
 				path: '/'
 			})
@@ -115,13 +115,16 @@ export default {
 							"&password=" + this.password
 			).then(res=>{
 				let data = res.data.should_login;
-				if(res){
+				if(data){
 					// 登录成功
+					// 本地存储
+					userObject['schoolid'] = res.data.schoolid
 					sessionStorage.setItem('token', 12345)
+					sessionStorage.setItem('userInfo', JSON.stringify(userObject));
 					this.$message({
-						message: '登录成功！3s后前往主页面',
+						message: '登录成功！1s后前往主页面',
 						type: 'success',
-						duration: 3000,
+						duration: 1000,
 						showClose: true,
 						center: true,
                		 });
@@ -132,8 +135,8 @@ export default {
 					}, 3000);			
 				}else {
 					this.$message({
-						message: '登录失败！3s后前往主页面',
-						type: 'success'
+						message: '登录失败!',
+						type: 'warning'
                		 });
 				}
 			})

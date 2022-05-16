@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       '/apis': {
         // 测试环境
-        target: 'http://8.130.50.152:8080/',
+        target: 'http://8.130.50.152:8000/',
         changeOrigin: true, // 是否跨域
         pathRewrite: {
           '^/apis': ''
